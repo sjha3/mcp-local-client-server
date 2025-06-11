@@ -24,6 +24,14 @@ The MCP client provides the following capabilities:
    ```
    pip install -r requirements.txt
    ```
+2. **Create .env file and add these environment variables:
+   ```
+   azure_endpoint
+   azure_deployment
+   api_version
+   api_key
+   azure_model_name
+   ```
 2. **Run the MCP server**:
    ```
    python server-main.py
