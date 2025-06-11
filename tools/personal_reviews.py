@@ -62,15 +62,15 @@ def get_reviews(query: str) -> list:
         return {"error": str(e)}
 
 @mcp.tool()
-def get_review(review_id: str) -> list: 
+def get_review(review_id: str, review_name:str) -> list: 
     """
-    Retrieve a review from the database by its ID.
+    Retrieve a review from the database by its ID or Name.
     Args:
         review_id (str): The unique identifier of the review.
     Returns:
         dict: Review data if found, else an error message.
     """
-    query = f"GetReviewsTest | where ReviewId == '{review_id}'"
+    query = f"GetReviewsTest | where ReviewId == '{review_id}' or ReviewName contains '{review_name}'"
     try:
         #logger.info(f"Running get_review for ReviewId: {review_id} : {query}")
         result = run_kusto_query(query)

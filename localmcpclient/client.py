@@ -53,7 +53,7 @@ class MCPClient:
             command="python",
             args=[server_script_path],
             env=None,
-            
+            read_timeout_seconds=30
         )
         # Get tools in OpenAI function-calling format
         self.tools_ = await mcp_server_tools(server_params_autogen)
@@ -63,15 +63,15 @@ class MCPClient:
     
     
     async def start_chat(self):
-        print("============== Starting chat ==============")
+        print("**** Starting chat ****")
         
-        print(self.tools_)                
+        #print(self.tools_)                
         
         while True:
             try:
                 task = input("Please enter a task: ")
                 if task.lower() == "exit":
-                    print("Exiting chat...")
+                    print("**** Exiting chat...")
                     break
                 print("Running task:", task)
                 await Console(self.agents.team_agents.run_stream(task = task))

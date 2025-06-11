@@ -25,7 +25,7 @@ class Agents_with_tools():
             azure_deployment=os.getenv("azure_deployment"),
             api_version=os.getenv("api_version"),
             api_key=os.getenv("api_key"),
-            model=os.getenv("azure_model_name"),    
+            model= "gpt-4o-2024-11-20"#enhance token/cost estimation using it instead of gpt-4o  
         )
         self.team_agents = None
 
@@ -33,7 +33,7 @@ class Agents_with_tools():
         text_mention_termination = TextMentionTermination("TERMINATE")
         max_messages_termination = MaxMessageTermination(25)
         termination = text_mention_termination | max_messages_termination
-        print("=====Try to create review agent=====")
+        print("**** Create review agent ****")
         review_agent = AssistantAgent(
             name = "ReviewAgent",
             model_client = self.model_client,
@@ -52,7 +52,7 @@ class Agents_with_tools():
             """,
             tools = mcp_tools
         )
-        print("=====Try to create finance agent=====")
+        print("**** Create finance agent ****")
         finance_agent = AssistantAgent(
             name = "FinanceAgent",
             model_client = self.model_client,
@@ -61,7 +61,7 @@ class Agents_with_tools():
             """,
             tools = mcp_tools
         )
-        print("=====Try to create file agent=====")
+        print("=**** Create file agent ****")
         file_agent = AssistantAgent(
             name = "FileAgent",
             model_client = self.model_client,
@@ -124,5 +124,5 @@ class Agents_with_tools():
                                  selector_func=selector_func,
                                  termination_condition=termination,
                                  allow_repeated_speaker=True)
-        print("=====Agent team created successfully=====")
+        print("**** Agent team created successfully ****")
     
